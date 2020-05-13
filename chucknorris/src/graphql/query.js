@@ -12,7 +12,7 @@ export const JOKES = gql`
 `;
 
 export const CATEGORY_JOKES = gql`
-    query categoryJokes($category: String) {
+    query categoryJokes($category: String!) {
         categoryJokes(category: $category) {
             created_at
             icon_url

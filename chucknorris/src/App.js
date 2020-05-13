@@ -5,6 +5,7 @@ import { persistCache } from 'apollo-cache-persist';
 import { createHttpLink } from 'apollo-link-http';
 
 import 'antd/dist/antd.css';
+import './App.css'
 
 import Routes from './container/routes';
 
