@@ -7,7 +7,7 @@ import Jokes from './jokes';
 import './style.css';
 
 const Home = props => {
-    
+
     return(
         <div className="container" >
             <Query query={CATEGORIES}>
@@ -24,7 +24,6 @@ const Home = props => {
                         )
                     } else if (data) {
                         if(Array.isArray(data.categories)) {
-                            console.log('-->', data.categories)
                             return <Jokes categories={data.categories} />
                         }
                         return <div>

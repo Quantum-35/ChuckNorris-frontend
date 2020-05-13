@@ -9,6 +9,7 @@ import { CATEGORY_JOKES, JOKES } from '../../graphql/query';
 
 const Jokes = ({ categories, client }) => {
     const [joke, setJoke] = useState(null);
+    const [fetchingJokes, setFetchingJokes] = useState(false);
     const [clickedCategory, setClickedCategory] = useState(null);
 
     const [queryRandomJokes, response] = useLazyQuery(
@@ -26,16 +27,18 @@ const Jokes = ({ categories, client }) => {
         }
     }, [response]);
 
-    const [queryCategoryJokes, {called, loading, data}] = useLazyQuery(
-        CATEGORY_JOKES,
-        { variables: { category: clickedCategory }, fetchPolicy: "network-only" }
-      );
-    
-    useEffect(() => {
-        if(data) {
-            setJoke(data.categoryJokes);
-        }
-    },[data]);
+    const queryCategoryJokes = async() => {
+    setFetchingJokes(true);
+    const res = await client.query({
+        query: CATEGORY_JOKES,
+        variables: {
+            category: clickedCategory
+        },
+        fetchPolicy: "network-only"
+    })
+    setJoke(res.data.categoryJokes);
+    setFetchingJokes(false);
+};
 
     const displayCategoryList = () => {
         if(Array.isArray(categories)) {
@@ -61,14 +64,14 @@ const Jokes = ({ categories, client }) => {
                     {displayCategoryList()}
                 <div className="random_jokes__fetch">
                     <span className="random_jokes_categoryName">Category: {clickedCategory || 'none'}</span>
-                    <Button type="primary" loading={loading} onClick={() => queryCategoryJokes()}>
+                    <Button type="primary" loading={fetchingJokes} onClick={() => {queryCategoryJokes()}}>
                         Get Joke
                     </Button>
                 </div>
                 </div>
             </div>
             <div className="random_jokes_container">
-                {loading ? (
+                {fetchingJokes ? (
                     <Loader
                         type="Rings"
                         color="#00BFFF"
