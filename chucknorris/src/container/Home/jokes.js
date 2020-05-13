@@ -45,11 +45,7 @@ const Jokes = ({ categories, client }) => {
                         key={i}
                         type="primary" ghost 
                         className="jokes_category___button"
-                        onClick={() => {
-                            setClickedCategory(categoryName);
-                            queryCategoryJokes();
-                        }
-                        }
+                        onClick={() => setClickedCategory(categoryName)}
                     >
                         {categoryName}
                     </Button>
@@ -61,8 +57,14 @@ const Jokes = ({ categories, client }) => {
     return(
         <div className="jokes__container" >
             <div className="jokes_categories__container">
-                <div style={{ margin: "6em" }}>
+                <div style={{ margin: "0 6em" }}>
                     {displayCategoryList()}
+                <div className="random_jokes__fetch">
+                    <span className="random_jokes_categoryName">Category: {clickedCategory || 'none'}</span>
+                    <Button type="primary" loading={loading} onClick={() => queryCategoryJokes()}>
+                        Get Joke
+                    </Button>
+                </div>
                 </div>
             </div>
             <div className="random_jokes_container">

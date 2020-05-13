@@ -49,3 +49,17 @@
     width: 85px;
     height: auto;
 }
+
+.random_jokes__fetch {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 8em;
+    align-items: center;
+}
+
+.random_jokes_categoryName {
+    font-family: 'Pangolin', cursive;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
