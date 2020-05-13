@@ -36,4 +36,16 @@
 .random_jokes_container {
     flex: 1;
     font-family: 'Pangolin', cursive;
+    width: 65%;
+    background: rgb(209, 220, 209);
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+
+}
+
+.random_jokes__img {
+    width: 85px;
+    height: auto;
 }
