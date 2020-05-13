@@ -4,6 +4,7 @@ export const SIGN_UP = gql`
     mutation sinup($data: CreateUserInput!){
         createUser(data: $data) {
             email
+            token
         }
     }
 `;

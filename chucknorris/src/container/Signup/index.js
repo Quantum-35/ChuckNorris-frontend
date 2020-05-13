@@ -34,6 +34,10 @@ const Signup = props => {
     const registerSuccessful = (cache, { data }) => {
         console.log('--> REGISTER USER COMPLETE', data);
         message.success('New User created successfully');
+        localStorage.setItem('token', data.createUser.token);
+        setTimeout(() => {
+            props.history.push('/');
+        }, 2000)
     }
 
     const signupVariables = {
